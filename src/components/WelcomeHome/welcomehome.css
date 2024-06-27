@@ -1,0 +1,42 @@
+.welcomehome{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:100vh;
+}
+.welcomehome .container{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width:60%;
+}
+.welcomehome .welcome-fao-logo img{
+    width:110px;
+    height:50px;
+}
+
+.welcomehome .welcome-content h1{
+    font-family: "Roboto";
+    font-size: 50px;
+    color:rgb(144, 211, 238);
+}
+.welcomehome .welcome-content span{
+    font-size: 20px;
+    color:var(--white-color);
+    
+}
+.welcomehome .welcome-content p{
+    font-size: 20px;
+}
+.welcomehome .login-btn button{
+    padding:20px 60px;
+    font-size: 20px;
+    font-weight: 600;
+    background-color: var(--primary-color-light);
+    color:var(--secondary-color);
+}
+.welcomehome .login-btn button:hover{
+    background-color: var(--primary-color);
+    color:var(--primary-color-light);
+}

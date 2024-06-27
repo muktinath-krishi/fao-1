@@ -1,0 +1,53 @@
+.createuser{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.createuser-header .header-content .back-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:60px;
+    height:60px;
+    border-radius: 50px;
+    background-color: var(--black-color);
+}
+.createuser-header .header-content .back-btn a i{
+    color:var(--white-color);
+    font-size: 30px;
+    margin:0;
+    padding:0;
+}
+.createuser-header .header-content span{
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--black-color);
+}
+.createuser-header .header-content h1{
+    font-size: 40px;
+    font-weight: 700;
+    color:var(--primary-color);
+}
+.createuser-header .header-content p{
+    font-size: 20px;  
+}
+.createuser-header .header-img img{
+    width:90%;  
+}
+
+.farmer-form{
+    row-gap: 20px;
+    border:2px solid #787878;
+    padding:20px 10px;
+    border-radius: 20px;
+}
+.farmer-form .register-btn button{
+    padding:10px 20px;
+    border-style: none;
+    background-color: var(--secondary-color); 
+}
+
+.farmer-form .register-btn button:hover{
+    background-color: var(--primary-color);  
+}

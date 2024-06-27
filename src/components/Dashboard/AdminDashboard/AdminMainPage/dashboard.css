@@ -1,0 +1,38 @@
+.admin-dashboard{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.temperature-card{
+    display:flex;
+    flex-direction: column;
+    padding:20px ;
+    border:1px solid #787878;
+    border-radius: 20px;
+    background-color:var(--white-color);
+    transition: box-shadow 0.5s ease-in-out;
+    cursor: pointer;
+}
+.temperature-card:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+.temperature-card .temperature-body{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.temperature-body .temp-icon{
+    font-size: 60px;
+    color:var(--primary-color);
+}
+.temperature-body .temperature-value p{
+    font-size: 16px;
+    color:#787878;
+    margin-bottom: 0px;
+}
+.temperature-body .temperature-value p span{
+    font-size: 30px;
+    font-weight: 700;
+    color:var(--black-color);
+}

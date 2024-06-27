@@ -1,0 +1,11 @@
+.userlist{
+  height:auto;
+    padding-right: 1rem;
+}
+
+.create-user button{
+    background-color: var(--secondary-color);  
+}
+.create-user button:hover{
+    background-color: var(--primary-color);  
+}
