@@ -1,12 +1,15 @@
 import React, { useEffect } from "react";
-import { NavLink} from "react-router-dom";
+import { NavLink, useLocation} from "react-router-dom";
 import FAOLogo from "../../../assets/fao_logo.png";
 import "./sidenavbar.css";
-import {useAuth } from '../../Auth/AuthContext';
+import { useAuth } from "../../Contexts/AuthContext";
+
 
 const SideNavbar = () => {
-  const {role} = useAuth();
-  const userId = localStorage.getItem('userId');
+  const { role, userId } = useAuth();
+  const location = useLocation();
+  
+  
 
   useEffect(() => {
     const toggle = document.getElementById("header-toggle");
@@ -56,9 +59,15 @@ const SideNavbar = () => {
               <i className="bx bx-wind nav_icon"></i>
               <span className="nav_name">Humidity</span>
             </NavLink>
+            {(role==='super_admin') && (
+              <NavLink to="adminlist" className={({isActive=(location.pathname.startsWith('/admin/adminlist'))})=>isActive?"nav_link active":"nav_link"}>
+              <i className='bx bxs-group nav_icon'></i>
+              <span className="nav_name">Admin</span>
+            </NavLink>
+            )}
 
-            {`${role}` === 'admin' &&(
-              <NavLink to="users" className={({isActive})=>isActive?"nav_link active":"nav_link"}>
+            {(role === 'admin'|| role ==='super_admin') &&(
+              <NavLink to="userlist" className={({isActive})=>isActive?"nav_link active":"nav_link"}>
               <i className='bx bxs-group nav_icon'></i>
               <span className="nav_name">User</span>
             </NavLink>

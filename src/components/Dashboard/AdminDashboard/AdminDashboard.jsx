@@ -40,11 +40,9 @@ const AdminDashboard = () => {
         <Header/>
         <SideNavbar/>
         <div className={`body-container ${isSidebarToggled ? 'body-pd' : ''}`}>
-            {/* <AdminMainPage isSidebarToggled={isSidebarToggled}/> */}
             <div className={`admin-main-page ${isSidebarToggled ? 'body-pd' : ''}`}>
-              <Outlet/> 
-            </div>
-           
+              <Outlet /> 
+            </div>  
         </div>
 
     </main>

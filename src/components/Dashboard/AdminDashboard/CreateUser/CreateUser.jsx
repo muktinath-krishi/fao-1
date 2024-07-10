@@ -54,7 +54,7 @@ const CreateUser = () => {
           <div className="col-md-4 header-content text-start">
             <div className="back-btn mb-2">
               <Link to="/admin/users">
-                <i class='bx bx-arrow-back' ></i>
+                <i className='bx bx-arrow-back' ></i>
               </Link>
             </div>
             <h1>
@@ -70,7 +70,7 @@ const CreateUser = () => {
         </div>
         <div className="col-md-8 form-container p-0 mt-5 text-start d-flex justify-content-center">
           <form className="row farmer-form d-flex justify-content-start" onSubmit={handleSubmit}>
-            <div className="col-md-4 col-12">
+            <div className="col-md-4 col-12 form-group">
               <label htmlFor="farmerId" className='form-label'>Farmer ID</label>
               <input type="text" id="farmerId" className="form-control" name="farmerId" required onChange={handleChange} />
             </div>

@@ -10,7 +10,6 @@ import NoPage from '../../../NoPage/NoPage'
 const MainPage = () => {
   return (
     <>
-    
     <Routes>
       <Route path="/" element={<Dashboard/>}/>
       <Route path="dashboard" element={<Dashboard/>}/>

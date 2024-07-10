@@ -8,7 +8,7 @@ main {
   font-size: var(--normal-font-size);
   transition: 0.5s;
 }
-a {
+a{
   text-decoration: none;
 }
 .header {
@@ -56,7 +56,9 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
- 
+}
+.nav a{
+  text-decoration: none;
 }
 .container-with-scroll {
   overflow: hidden;
@@ -70,6 +72,7 @@ a {
   align-items: center;
   column-gap: 1rem;
   padding: 0.5rem 0 0.5rem 1.5rem;
+  text-decoration: none;
 }
 .nav_logo{
     display: flex;

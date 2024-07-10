@@ -1,8 +1,8 @@
 
 import React, { useEffect, useState } from 'react'
-import { useAuth } from '../../../Contexts/AuthContext';
+import { useAuth } from '../../../Contexts/AuthContext'
 
-const Profile = () => {
+const AdminProfile = () => {
   const { user } = useAuth();
   const [name, setName] = useState(localStorage.getItem('name') || '');
   const [email, setEmail] = useState(localStorage.getItem('email') || '');
@@ -31,5 +31,5 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default AdminProfile
 

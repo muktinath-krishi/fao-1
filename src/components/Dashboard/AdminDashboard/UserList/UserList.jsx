@@ -10,7 +10,7 @@ const UserList = () => {
     <>
     <div className="userlist">
       <div className="create-user d-flex justify-content-end align-items-center">
-        <NavLink to="/admin/createuser">
+        <NavLink to="/admin/createuser" className="text-decoration-none">
           <button type="button" className='btn btn-primary d-flex gap-2 justify-content-center align-items-center'><i className='bx bx-plus nav_icon'></i>Create User</button>
         </NavLink>
       </div>

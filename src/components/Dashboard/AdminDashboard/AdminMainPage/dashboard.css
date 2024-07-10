@@ -17,6 +17,17 @@
 .temperature-card:hover {
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
+.temperature-card .temperature-title{
+    display: flex;
+    justify-content: space-between;
+}
+.temperature-card .temperature-title .deviceid{
+    font-family: monospace;
+    font-size: 26px;
+    font-weight: 700;
+    color:#787878;
+}
+
 .temperature-card .temperature-body{
     display:flex;
     justify-content: space-between;

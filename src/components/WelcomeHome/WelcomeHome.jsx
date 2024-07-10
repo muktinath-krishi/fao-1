@@ -22,7 +22,7 @@ const WelcomeHome = () => {
             <p className='mt-5'>In the rapidly evolving field of agriculture, FAO Automation stands at the forefront by offering state-of-the-art greenhouse and hydroponic automation systems. By seamlessly integrating technology with agriculture, FAO Automation ensures precise control over environmental conditions, nutrient delivery, and irrigation schedules, all accessible at the touch of a button.</p>
           </div>
           <div className="login-btn">
-            <Link to="login">
+            <Link to="/login">
               <button className='btn btn-primary'>Dashboard Login</button>
             </Link>
           </div>

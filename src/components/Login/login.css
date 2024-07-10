@@ -1,0 +1,10 @@
+.custom-modal{
+background-color: rgba(30, 30, 30, 0.8);
+width:100% !important;
+padding:60px;
+}
+.modal-backdrop {
+    background-color: transparent;
+  }
+
+
