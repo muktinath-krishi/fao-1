@@ -1,8 +1,7 @@
 // src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth} from './components/Contexts/AuthContext';
-
+import { AuthProvider, useAuth } from './components/Contexts/AuthContext';
 
 // User login page
 import Login from './components/Login/Login';
@@ -35,11 +34,13 @@ import './App.css';
 import CreateAdmin from './components/Dashboard/AdminDashboard/CreateAdmin/CreateAdmin';
 import AdminList from './components/Dashboard/AdminDashboard/AdminList/AdminList';
 import ShowAdmin from './components/Dashboard/AdminDashboard/ShowAdmin/ShowAdmin';
-
+import UpdateAdmin from './components/Dashboard/AdminDashboard/AdminUpdate/AdminUpdate';
+import SuperAdminList from './components/Dashboard/AdminDashboard/SuperAdmin/SuperAdminList';
+import ShowSuperAdmin from './components/Dashboard/AdminDashboard/SuperAdmin/ShowSuperAdmin';
+import CreateSuperAdmin from './components/Dashboard/AdminDashboard/SuperAdmin/CreateSuperAdmin';
 
 const App = () => {
   const { role, isAuthenticated } = useAuth();
-
   return (
     <div className="app">
       <Router>
@@ -49,37 +50,49 @@ const App = () => {
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/" element={<WelcomeHome />} />
 
-            {/* admin protected*/}
-            {isAuthenticated && role === 'admin' || role === 'super_admin'?(
-              <Route path="/admin" element={<AdminDashboard />}>
-                <Route index element={<Dashboard />} />
-                <Route path="dashboard" element={<Dashboard />} />
-                <Route path="temperature" element={<Temperature />} />
-                <Route path="humidity" element={<Humidity />} />
-                <Route path="adminlist" element={<AdminList />} />
-                <Route path="createadmin" element={<CreateAdmin/>}/>
-                <Route path="adminlist/showadmin/:id" element={<ShowAdmin/>}/>
-                <Route path="userlist" element={<UserList />} />
-                <Route path="createuser" element={<CreateUser />} />
-                <Route path="updateuser/:id" element={<UpdateUser />} />
-                <Route path="profile/:id" element={<AdminProfile />} />
-              </Route>
+          {/* protected admin routes */}
+          {isAuthenticated && (role === 'super_admin' || role === 'admin') && (
+            <Route path="admin" element={<AdminDashboard />}>
+              <Route index element={<Dashboard />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="temperature" element={<Temperature />} />
+              <Route path="humidity" element={<Humidity />} />
 
-            ):(
-              <Route path="/admin/login" element={<AdminLogin />} />
-            )
-          }
+              {/* admin/superadmin */}
+              <Route path="superadmin" element={<SuperAdminList/>} />
+              <Route path="createsuperadmin" element={<CreateSuperAdmin/>} />
+              <Route path="superadmin/showsuperadmin/:id" element={<ShowSuperAdmin/>} />
+              
 
-            {/* user protected */}
-            {isAuthenticated ?(
-              <Route path="/user/*" element={<UserDashboard /> } />
 
-            ):(
+              {/* admin/admins */}
+              <Route path="admins" element={<AdminList />} />
+              <Route path="createadmin" element={<CreateAdmin />} />
+              <Route path="admins/showadmin/:id" element={<ShowAdmin />} />
+              <Route path="admins/updateadmin/:id" element={<UpdateAdmin />} />
+
+              {/* admin/users */}
+              <Route path="users" element={<UserList />} />
+              <Route path="createuser" element={<CreateUser />} />
+              <Route path="updateuser/:id" element={<UpdateUser />} />
+              <Route path="profile/:id" element={<AdminProfile />} />
+            </Route>
+          )}
+
+          {/* protected user routes */}
+          {isAuthenticated && role === 'user' && (
+            <Route path="/user/*" element={<UserDashboard />} />
+          )}
+
+          {/* fallback routes for non-authenticated users */}
+          {!isAuthenticated && (
+            <>
               <Route path="/login" element={<Login />} />
-            )}
-          
+              <Route path="/admin/login" element={<AdminLogin />} />
+            </>
+          )}
 
-          {/* catch all the page */}
+          {/* catch all */}
           <Route path="*" element={<NoPage />} />
         </Routes>
       </Router>

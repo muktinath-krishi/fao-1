@@ -16,6 +16,11 @@ const loginUser = async (phone_number, password) => {
 const loginAdmin = async (email, password) => {
   const response = await axios.post(`${API_BASE_URL}/admin/login`, { email, password });
   const { _token, user } = response.data;
+
+  // if (user.is_blocked) {
+  //   throw new Error('You have been blocked. Please contact the administrator.');
+  // }
+
   return {token: _token, user};
  
 };
@@ -40,7 +45,7 @@ export const useAuthApi = () => {
   const handleAdminLogin = async (email, password) => {
     const data = await loginAdmin(email, password);
 
-    console.log("handle admin data:",data);
+    // console.log("handle admin data:",data);
     const user = data.user;
     login(data.token, data.user.role, data.user.id, user);
     

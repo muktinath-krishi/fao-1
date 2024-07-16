@@ -1,0 +1,37 @@
+
+.admin-profile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+}
+
+.admin-profile-content{
+    border:1px solid #787878;
+    margin-top:50px;
+    padding:20px;
+    border-radius: 20px;
+}
+
+.profile-edit-btn{
+    width:100%;
+}
+
+.admin-profile-details{
+    display: flex;
+    justify-content: space-between;
+    column-gap: 60px;
+    row-gap: 20px;
+    width:auto;
+}
+
+.admin-profile-img{
+    overflow: hidden;
+    height: auto;
+}
+.admin-profile-img img{
+    width:200px;
+    height:200px;
+    object-fit: cover;
+    border-radius: 100%;
+}

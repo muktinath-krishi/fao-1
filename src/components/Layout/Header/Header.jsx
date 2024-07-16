@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from 'react'
 import "../../Layout/SideNav/sidenavbar.css";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { useAuth } from '../../Contexts/AuthContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button } from 'react-bootstrap';
@@ -9,7 +9,8 @@ import axios from 'axios';
 
 
 const Header = () => {
-  const {role, logout} = useAuth();
+  const {role, userId, logout} = useAuth();
+ 
   const [showModal, setShowModal] = useState(false);
   const [old_password, setOldpassword] = useState('');
   const [password, setPassword] = useState('');
@@ -42,7 +43,6 @@ const Header = () => {
           return;
         }
         try {
-      
           const response =  await axios.post(`${API_BASE_URL}/user/change-password`, { 
           old_password, password });
           console.log("this is password response",response)
@@ -73,7 +73,7 @@ const Header = () => {
             <li className="nav-item dropdown">
               <Link className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i className="fas fa-user fa-fw"></i></Link>
                 <ul className="dropdown-menu dropdown-menu-end mt-4 me-5" aria-labelledby="navbarDropdown">
-                    <li><Link className="dropdown-item" href="#!">Settings</Link></li>
+                    <li><Link to={`profile/${userId}`} className="dropdown-item">Profile</Link></li>
                     <li><Link className="dropdown-item" href="#!" onClick={() => setShowModal(true)}>Change Password</Link></li>
                     <li><hr className="dropdown-divider" /></li>
                     {role === 'admin' || role === 'super_admin' ? (
@@ -85,31 +85,30 @@ const Header = () => {
             </li>
         </div>
 
-        
-                      {/* Forgot Password Modal */}
-                  
-                      <Modal show={showModal} onHide={() => setShowModal(false)} className="custom-modal">
-                        <Modal.Header closeButton>
-                          <Modal.Title>Reset Password</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                        <div className="form-outline mb-4">
-                          <input type="password" id="old_password" className="form-control" value={old_password} onChange={(e) => setOldpassword(e.target.value)} placeholder='Old Password' required />
-                        </div>
-                          <div className="form-outline mb-4">
-                            <input type="password" id="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='New Password' required />
-                          </div>
-                          <div className="form-outline mb-4">
-                            <input type="password" id="confirmPassword" className="form-control" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder='Confirm Password' required />
-                          </div>
-                          {modalError && <p style={{ color: 'red', marginTop: '10px' }}>{modalError}</p>}
-                        </Modal.Body>
-                        <Modal.Footer>
-                          <Button variant="primary" onClick={handleForgotPassword}>
-                            Update Password
-                          </Button>
-                        </Modal.Footer>
-                      </Modal>
+         {/* Forgot Password Modal */}
+          <Modal show={showModal} onHide={() => setShowModal(false)} className="custom-modal">
+            <Modal.Header closeButton>
+              <Modal.Title>Reset Password</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <div className="form-outline mb-4">
+                <input type="password" id="old_password" className="form-control" value={old_password} onChange={(e) => setOldpassword(e.target.value)} placeholder='Old Password' required />
+              </div>
+              <div className="form-outline mb-4">
+                <input type="password" id="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='New Password' required />
+              </div>
+              <div className="form-outline mb-4">
+                <input type="password" id="confirmPassword" className="form-control" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder='Confirm Password' required />
+              </div>
+              {modalError &&
+                <p style={{ color: 'red', marginTop: '10px' }}>{modalError}</p>}
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="primary" onClick={handleForgotPassword}>
+                Update Password
+              </Button>
+            </Modal.Footer>
+          </Modal>
       </header>
     </>
   )

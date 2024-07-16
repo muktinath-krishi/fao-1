@@ -4,7 +4,7 @@ import axios from 'axios';
 import "../UserList/userlist.css";
 import { API_BASE_URL } from '../../../Api/auth';
 
-const AdminList = () => {
+const SuperAdminList = () => {
   const [adminData, setAdminData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,9 +13,8 @@ const AdminList = () => {
   useEffect(() => {
     const fetchAdminData = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/admin/admins`);
-        setAdminData(response.data.admins);
-       
+        const response = await axios.get(`${API_BASE_URL}/admin/super-admin`);
+        setAdminData(response.data.admins);   
         setLoading(false);
       } catch (error) {
         setError('Failed to fetch admin data.');
@@ -26,9 +25,6 @@ const AdminList = () => {
     fetchAdminData();
   }, []);
 
-  // edit function to pass current data to updateadmin
-
- 
 
   // isBlocked function
   const handleBlockToggle = async (userId) => {
@@ -51,7 +47,6 @@ const AdminList = () => {
       const updatedAdminData = adminData.filter(admin => admin.id !== userId);
       setAdminData(updatedAdminData);
     } catch (error) {
-      console.error('Error deleting admin:', error);
       setError('Failed to delete admin.');
     }
   };
@@ -95,12 +90,12 @@ const AdminList = () => {
                   (<div className="btn btn-success">Active</div>)
                   }</td>
                   <td className='d-flex gap-2'>
-                    <Link to={`/admin/admins/showadmin/${item.id}`}>
+                    <Link to={`/admin/superadmin/showsuperadmin/${item.id}`}>
                       <button className='btn btn-success'>
                         <i className='bx bxs-show'></i>
                       </button>
                     </Link>
-                    <Link to={`/admin/admins/updateadmin/${item.id}`}>
+                    <Link to={`/admin/superadmin/updateadmin/${item.id}`}>
                       <button className='btn btn-primary'>
                         <i className='bx bx-edit-alt'></i>
                       </button>
@@ -121,4 +116,4 @@ const AdminList = () => {
   );
 }
 
-export default AdminList;
+export default SuperAdminList;

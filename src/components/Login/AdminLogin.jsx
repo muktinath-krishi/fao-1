@@ -1,9 +1,7 @@
 // src/components/Login/AdminLogin.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {useAuthApi} from "../Api/auth";
-
-
+import { useAuthApi } from "../Api/auth";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -17,24 +15,23 @@ const AdminLogin = () => {
 
 
     try {
-      console.log("hey i am here")
       const data = await handleAdminLogin(email, password);
-      console.log("Data from handleAdminLogin:",data);
-
          if (data.user.role === 'admin' || data.user.role === 'super_admin') {
-          // console.log("this is admin")
           navigate("/admin");
         } 
-        // else if (data.user.role === 'super_admin') {
-        //   // console.log("this is super admin")
-        //   navigate("/super-admin");
-        // } 
+       
         else {
           setError('Unauthorized role');
         }
      
     } catch (error) {
-      setError('Invalid username or password',error);
+      if(!data.user){
+        setError('User does not exists')
+      }else{
+        setError('Invalid username or password',error);
+
+      }
+      
     }
   };
 

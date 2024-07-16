@@ -2,10 +2,10 @@ import React,{useState, useEffect} from 'react'
 import { API_BASE_URL } from '../../../Api/auth';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
-import "./showadmin.css"
+import "./style/showsuperadmin.css";
 
 
-const ShowAdmin = () => {
+const ShowSuperAdmin = () => {
     const { id } = useParams();
     const [adminData, setAdminData] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -14,8 +14,9 @@ const ShowAdmin = () => {
   useEffect(() => {
     const fetchAdminData = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/admin/admins?userId=${id}`);
+        const response = await axios.get(`${API_BASE_URL}/admin/super-admin?userId=${id}`);
         setAdminData(response.data.admin);
+        console.log("show data:", response.data.admin);
         setLoading(false);
       } catch (error) {
         setError('Failed to fetch admin data.');
@@ -39,7 +40,7 @@ const ShowAdmin = () => {
       <div className="adminlist">
         <div className="adminlist-content mt-5">
             <div className="back-btn mb-2">
-              <Link to="/admin/admins">
+              <Link to="/admin/superadmin">
                 <i className='bx bx-arrow-back' ></i>
               </Link>
             </div>
@@ -55,4 +56,4 @@ const ShowAdmin = () => {
 }
   
 
-export default ShowAdmin
+export default ShowSuperAdmin

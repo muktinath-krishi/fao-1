@@ -4,7 +4,7 @@ import "../CreateUser/createuser.css";
 import axios from "axios";
 import { API_BASE_URL } from "../../../Api/auth"
 
-const CreateAdmin = () => {
+const CreateSuperAdmin = () => {
   const navigate = useNavigate();
     const[name,setName] = useState('');
     const[email,setEmail] = useState('');
@@ -42,14 +42,14 @@ const CreateAdmin = () => {
 
     try {
       
-      await axios.post(`${API_BASE_URL}/admin/admins/store`, {
+      await axios.post(`${API_BASE_URL}/admin/super-admin/store`, {
             name,
             email,
             password,
             confirm_password
         });
         setLoading(false);
-        navigate("/admin/admins");
+        navigate("/admin/superadmin");
 
     } catch (error) {
         setError('Failed to create admin.');
@@ -70,7 +70,7 @@ if (loading) {
           
           <div className="col-md-4 header-content text-start">
             <div className="back-btn mb-2">
-              <Link to="/admin/admins">
+              <Link to="/admin/superadmin">
                 <i className='bx bx-arrow-back' ></i>
               </Link>
             </div>
@@ -118,4 +118,4 @@ if (loading) {
   )
 }
 
-export default CreateAdmin;
+export default CreateSuperAdmin;

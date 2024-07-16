@@ -6,7 +6,7 @@ import { useAuth } from "../../Contexts/AuthContext";
 
 
 const SideNavbar = () => {
-  const { role, userId } = useAuth();
+  const { role} = useAuth();
   const location = useLocation();
   
   
@@ -59,24 +59,34 @@ const SideNavbar = () => {
               <i className="bx bx-wind nav_icon"></i>
               <span className="nav_name">Humidity</span>
             </NavLink>
+
             {(role==='super_admin') && (
-              <NavLink to="adminlist" className={({isActive=(location.pathname.startsWith('/admin/adminlist'))})=>isActive?"nav_link active":"nav_link"}>
+              <NavLink to="superadmin" className={({isActive=(location.pathname.startsWith('/admin/superadmin'))})=>isActive?"nav_link active":"nav_link"}>
+              <i className='bx bxs-group nav_icon'></i>
+              <span className="nav_name">SuperAdmin</span>
+            </NavLink>
+            )}
+
+            {(role==='super_admin') && (
+              <NavLink to="admins" className={({isActive=(location.pathname.startsWith('/admin/admins'))})=>isActive?"nav_link active":"nav_link"}>
               <i className='bx bxs-group nav_icon'></i>
               <span className="nav_name">Admin</span>
             </NavLink>
             )}
 
             {(role === 'admin'|| role ==='super_admin') &&(
-              <NavLink to="userlist" className={({isActive})=>isActive?"nav_link active":"nav_link"}>
+              <NavLink to="users" className={({isActive=(location.pathname.startsWith('/admin/users'))})=>isActive?"nav_link active":"nav_link"}>
               <i className='bx bxs-group nav_icon'></i>
               <span className="nav_name">User</span>
             </NavLink>
             )}
 
-            <NavLink to={`profile/${userId}`} className={({isActive})=>isActive?"nav_link active":"nav_link"}>
+
+
+            {/* <NavLink to={`profile/${userId}`} className={({isActive})=>isActive?"nav_link active":"nav_link"}>
               <i className="bx bxs-user nav_icon"></i>
               <span className="nav_name">Profile</span>
-            </NavLink>
+            </NavLink> */}
             
           </div>
         </div>
