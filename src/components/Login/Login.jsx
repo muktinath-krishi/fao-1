@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {useAuthApi} from "../Api/auth";
+import Loading from '../Loading/Loading';
 import "./login.css";
 
 const Login = () => {
@@ -9,14 +10,19 @@ const Login = () => {
   const [phone_number, setPhonenumber] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
       await handleUserLogin(phone_number, password);
+      setLoading(false);
       navigate('/user');
     } catch (error) {
+      setLoading(false);
       setError('Invalid email or password');
     }
   };
@@ -26,6 +32,9 @@ const Login = () => {
   return (
     <>
       <div className="container-fluid vh-100 d-flex justify-content-center align-items-center" style={{ backgroundColor: "#9A616D" }}>
+      {loading ? (
+        <Loading /> // Show loading spinner while loading
+      ) : (
         <div className="container">
           <div className="row d-flex justify-content-center align-items-center">
             <div className="col col-xl-10 p-0">
@@ -65,8 +74,8 @@ const Login = () => {
               </div>
             </div>
           </div>
-        
         </div>
+        )}
       </div>
     </>
   );

@@ -1,0 +1,18 @@
+{
+    "profile" : "प्रोफाइल",
+    "change_password" : "पासवर्ड परिवर्तन गर्नुहोस्",
+    "logout" : "लगआउट",
+    "dashboard" : "ड्यासबोर्ड",
+    "temperature" : "तापक्रम",
+    "humidity" : "आर्द्रता",
+    "superadmin" : "सुपर एडमिन",
+    "admin" : "एडमिन",
+    "user" : "प्रयोगकर्ता",
+    "id" : "आईडी",
+    "name" : "नाम",
+    "email" : "इमेल",
+    "status" : "स्थिति",
+    "action" : "क्रियाशील",
+    "phone_number" : "फोन नम्बर"
+    
+}

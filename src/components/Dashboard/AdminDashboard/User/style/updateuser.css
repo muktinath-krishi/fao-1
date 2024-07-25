@@ -1,0 +1,21 @@
+.createuser{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.createuser-header .back-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:60px;
+    height:60px;
+    border-radius: 50px;
+    background-color: var(--black-color);
+}
+.createuser-header  .back-btn a i{
+    color:var(--white-color);
+    font-size: 30px;
+    margin:0;
+    padding:0;
+}

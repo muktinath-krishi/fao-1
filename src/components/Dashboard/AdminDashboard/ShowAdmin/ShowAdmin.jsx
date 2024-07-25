@@ -2,6 +2,7 @@ import React,{useState, useEffect} from 'react'
 import { API_BASE_URL } from '../../../Api/auth';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
+import Loading from "../../../Loading/Loading"
 import "./showadmin.css"
 
 
@@ -27,7 +28,7 @@ const ShowAdmin = () => {
   }, [id]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div><Loading/></div>;
   }
 
   if (error) {
@@ -39,7 +40,7 @@ const ShowAdmin = () => {
       <div className="adminlist">
         <div className="adminlist-content mt-5">
             <div className="back-btn mb-2">
-              <Link to="/admin/admins">
+              <Link to="/admin/admin-management">
                 <i className='bx bx-arrow-back' ></i>
               </Link>
             </div>

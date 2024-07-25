@@ -4,7 +4,7 @@ import "./dashboard.css"
 const Dashboard = () => {
   return (
     <>
-    <div className="admin-dashboard gap-5 mt-3">
+    <div className="container admin-dashboard gap-5 mt-3">
       
       {/* temperature */}
       <div className="col-md-2 gap-3 temperature-card">
@@ -47,7 +47,7 @@ const Dashboard = () => {
           <i className='bx bx-droplet' ></i>
           </div>
           <div className="temperature-value text-start">
-          <p><span>5.8</span><br/> Acidic Solution</p>
+          <p><span>4.5</span><br/> Acidic</p>
           </div>
         </div>
       </div>
@@ -79,7 +79,7 @@ const Dashboard = () => {
           <i className='bx bx-cloud'></i>
           </div>
           <div className="temperature-value text-start">
-          <p><span>5.26 %</span><br/>Normal</p>
+          <p><span>5.26 ppm</span><br/>Normal</p>
           </div>
         </div>
       </div>
@@ -134,7 +134,7 @@ const Dashboard = () => {
 
       <div className="col-md-2 gap-3 temperature-card">
         <div className="temperatue-title text-start">
-          <p>Total Devices</p>
+          <p>Active Devices</p>
         </div>
         <div className="temperature-body">
           <div className="temp-icon">

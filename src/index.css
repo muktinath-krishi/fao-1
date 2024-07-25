@@ -19,6 +19,7 @@
   --body-font: "Nunito", sans-serif;
   --normal-font-size: 1rem;
   --z-fixed: 100;
+  --bs-breadcrumb-divider:"•";
 }
 *,
 ::before,

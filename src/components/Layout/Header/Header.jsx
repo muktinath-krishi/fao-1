@@ -1,22 +1,28 @@
-import React, {useState, useEffect } from 'react'
+import React, {useState, useEffect, useContext } from 'react'
 import "../../Layout/SideNav/sidenavbar.css";
 import { Link} from "react-router-dom";
 import { useAuth } from '../../Contexts/AuthContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button } from 'react-bootstrap';
 import { API_BASE_URL } from "../../Api/auth";
+import strings from '../../Localization/Localization';
+import LanguageContext from '../../Localization/LanguageContext';
 import axios from 'axios';
 
 
 const Header = () => {
-  const {role, userId, logout} = useAuth();
+  const {changeLanguage, language} = useContext(LanguageContext);
+  const {role, userId, user, logout} = useAuth();
  
   const [showModal, setShowModal] = useState(false);
   const [old_password, setOldpassword] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [modalError, setModalError] = useState('');
-  
+  const [profile_image, setProfileImage] = useState(localStorage.getItem('profile_image') || '');
+  const [name, setName] = useState(localStorage.getItem('name') || '');
+  const [flagImage, setFlagImage] = useState('/usa-flag.png'); // default flag
+
  
     useEffect(() => {
         const toggle = document.getElementById("header-toggle");
@@ -33,9 +39,22 @@ const Header = () => {
         if (toggle && headerpd) {
           toggle.addEventListener("click", showNavbar);
         }
-    
-        
-      }, []);
+
+        if(user){
+          localStorage.setItem('name', user.name);
+          localStorage.setItem('profile_image', user.profile_image);
+
+          setName(user.name);
+          setProfileImage(user.profile_image);
+        }
+
+         // Update flag based on language
+    if (language === 'eng') {
+      setFlagImage('/usa-flag.png');
+    } else if (language === 'nep') {
+      setFlagImage('/nepal-flag.png');
+    }
+      }, [user, language]);
 
       const handleForgotPassword = async () => {
         if (password !== confirmPassword) {
@@ -45,11 +64,8 @@ const Header = () => {
         try {
           const response =  await axios.post(`${API_BASE_URL}/user/change-password`, { 
           old_password, password });
-          console.log("this is password response",response)
-          console.log(response);
 
           if(response.data.success){
-            console.log("password updated successfully")
             setShowModal(false);
           }
           else{
@@ -61,6 +77,10 @@ const Header = () => {
         }
       };
 
+      const handleLanguageChange = (lang) => {
+        changeLanguage(lang);
+      };
+
 
 
   return (
@@ -69,18 +89,42 @@ const Header = () => {
         <div className="header_toggle">
           <i className="bx bx-menu" id="header-toggle"></i>
         </div>
+        <div className="lang-translation" style={{width:"90%"}}>
+          <div className="dropdown">
+            <button className="btn btn-secondary dropdown-toggle lang-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src={flagImage} alt="English" className='me-2' width="30" height="30"/>
+            </button>
+            <ul className="dropdown-menu mt-4">
+              <li>
+                <Link className="dropdown-item" onClick={()=>handleLanguageChange('eng')}>
+                  <img src="/usa-flag.png" alt="English" className='me-2' width="30" height="30"/>English
+                </Link>
+              </li>
+              <li>
+                <Link className="dropdown-item" onClick={()=>handleLanguageChange('nep')}>
+                  <img src="/nepal-flag.png" alt="Nepal" className='me-2' width="30" height="30"/>Nepali
+                </Link>
+              </li>
+            </ul>
+          </div>      
+        </div>
+
         <div className="header_img">
-            <li className="nav-item dropdown">
-              <Link className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i className="fas fa-user fa-fw"></i></Link>
-                <ul className="dropdown-menu dropdown-menu-end mt-4 me-5" aria-labelledby="navbarDropdown">
-                    <li><Link to={`profile/${userId}`} className="dropdown-item">Profile</Link></li>
-                    <li><Link className="dropdown-item" href="#!" onClick={() => setShowModal(true)}>Change Password</Link></li>
+            <li className="nav-item dropdown"> 
+              <Link className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src={"https://fao.muktinathitech.com.np" + profile_image} alt={name} style={{borderRadius: '100%'}} />
+              </Link>
+                <ul className="dropdown-menu dropdown-menu-end mt-4 me-5" aria-labelledby="navbarDropdown">        
+                    <li><Link to={`profile/${userId}`} className="dropdown-item">{strings.profile}</Link></li>
+
+                    <li><Link className="dropdown-item" onClick={() => setShowModal(true)}>{strings.change_password}</Link></li>
+
                     <li><hr className="dropdown-divider" /></li>
                     {role === 'admin' || role === 'super_admin' ? (
-              <li><Link to="/admin/login" className="dropdown-item" onClick={logout}>Logout</Link></li>
-            ) : (
-              <li><Link to="/" className="dropdown-item" onClick={logout}>Logout</Link></li>
-            )}    
+                    <li><Link to="/admin/login" className="dropdown-item" onClick={logout}>{strings.logout}</Link></li>
+                      ) : (
+                      <li><Link to="/" className="dropdown-item" onClick={logout}>{strings.logout}</Link></li>
+                    )}    
                 </ul>
             </li>
         </div>

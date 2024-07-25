@@ -23,11 +23,11 @@ const WelcomeHome = () => {
           </div>
           <div className="login-btn">
             <Link to="/login">
-              <button className='btn btn-primary'>User Login</button>
+              <button className='btn btn-primary'>Dashboard Login</button>
             </Link>
-            <Link to="/admin/login">
+            {/* <Link to="/admin/login">
               <button className='btn btn-primary'>Admin Login</button>
-            </Link>
+            </Link> */}
           </div>
         </div>  
       </div>

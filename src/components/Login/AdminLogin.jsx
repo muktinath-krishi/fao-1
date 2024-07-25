@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthApi } from "../Api/auth";
+import Loading from "../Loading/Loading";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -9,14 +10,19 @@ const AdminLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false); // Add loading state
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true); // Start loading
 
 
     try {
       const data = await handleAdminLogin(email, password);
+      setLoading(false); // Stop loading
+
          if (data.user.role === 'admin' || data.user.role === 'super_admin') {
+          // navigate(`/${data.user.role}`);
           navigate("/admin");
         } 
        
@@ -25,6 +31,7 @@ const AdminLogin = () => {
         }
      
     } catch (error) {
+      setLoading(false); // Stop loading
       if(!data.user){
         setError('User does not exists')
       }else{
@@ -37,6 +44,9 @@ const AdminLogin = () => {
 
   return (
     <div className="container-fluid vh-100 d-flex justify-content-center align-items-center" style={{ backgroundColor: "#9A616D" }}>
+      {loading ? (
+        <Loading /> // Show loading spinner while loading
+      ) : (
       <div className="container">
         <div className="row d-flex justify-content-center align-items-center">
           <div className="col col-xl-10 p-0">
@@ -71,6 +81,7 @@ const AdminLogin = () => {
           </div>
         </div>
       </div>
+      )}
     </div>
   );
 };

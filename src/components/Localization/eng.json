@@ -1,0 +1,18 @@
+{
+    "profile" :"Profile",
+    "change_password":"Change Password",
+    "logout":"Logout",
+    "dashboard" : "Dashboard",
+    "temperature" : "Temperature",
+    "humidity" : "Humidity",
+    "superadmin":"Super Admin",
+    "admin":"Admin",
+    "user":"User",
+    "device":"Device",
+    "id":"Id",
+    "name":"Name",
+    "email":"Email",
+    "status":"Status",
+    "action":"Action",
+    "phone_number" :"Phone Number"
+}

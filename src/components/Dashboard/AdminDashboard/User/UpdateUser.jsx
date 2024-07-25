@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from "axios";
 import { API_BASE_URL } from "../../../Api/auth";
-import "./adminupdate.css";
+import "./style/updateuser.css";
 import { toast } from 'react-toastify';
 
-const UpdateAdmin = () => {
+
+const UpdateUser = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [adminData, setAdminData] = useState(null);
+  const [userData, setUserData] = useState(null);
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [confirm_password, setConfirmPassword] = useState('');
@@ -19,18 +20,21 @@ const UpdateAdmin = () => {
   const notifyUpdate = (message) => {
     toast.success(message, { position: "top-right", autoClose: 5000 });
   };
+  const notifyFailed = (message) => {
+    toast.error(message, { position: "top-right", autoClose: 5000 });
+  };
 
   useEffect(() => {
-    const fetchAdminData = async () => {
+    const fetchUserData = async () => {
       // console.log("user id from url:",id)
       try {
         // console.log("i am here")
-        const response = await axios.get(`${API_BASE_URL}/admin/admins?userId=${id}`);
+        const response = await axios.get(`${API_BASE_URL}/admin/users?userId=${id}`);
         // console.log("Response data:",response.data.admin);
 
         if (response) {
-          setAdminData(response.data.admin);
-          setName(response.data.admin.name);
+          setUserData(response.data.user);
+          setName(response.data.user.name);
         } else {
           setError('Admin not found');
         }
@@ -39,7 +43,7 @@ const UpdateAdmin = () => {
       }
     };
 
-    fetchAdminData();
+    fetchUserData();
   }, [id]);
 
   const handleSubmit = async (e) => {
@@ -50,21 +54,21 @@ const UpdateAdmin = () => {
       return;
     }
 
-    setLoading(true);
-
     try {
-      const response = await axios.patch(`${API_BASE_URL}/admin/admins/update?userId=${id}`, {
+      const response = await axios.patch(`${API_BASE_URL}/admin/users/update?userId=${id}`, {
         name,
         password,
         confirm_password: confirm_password
       });
 
-      
+     
       notifyUpdate(response.data.message);
-      navigate("/admin/admin-management");
+      navigate("/admin/user-management");
+
     } catch (error) {
-      setError('Failed to update admin.');
-      // console.error('Error updating admin:', error);
+      notifyFailed('Failed to update user.');
+      console.error('Error updating user:', error);
+      
     }
   };
 
@@ -75,14 +79,14 @@ const UpdateAdmin = () => {
     if (name === 'confirm_password') setConfirmPassword(value);
   };
 
-  
+
 
   return (
     <>
       <div className="createuser mt-5 mb-5 p-0"> 
         <div className="createuser-header d-flex gap-5 justify-content-center align-items-center">
           <div className="back-btn mb-2">
-            <Link to="/admin/admin-management">
+            <Link to="/admin/user-management">
               <i className='bx bx-arrow-back'></i>
             </Link>
           </div> 
@@ -90,14 +94,14 @@ const UpdateAdmin = () => {
         <div className="col-md-8 form-container p-0 mt-5 text-start d-flex justify-content-center">
           <form className="row farmer-form d-flex justify-content-start" onSubmit={handleSubmit}>
             <div className="col-md-6 col-12 form-group">
-              <label htmlFor="name" className='form-label'>Admin Name</label>
+              <label htmlFor="name" className='form-label'>User Name</label>
               <input 
                 type="text" 
                 id="name" 
                 className="form-control" 
                 name="name" 
                 value={name} 
-                placeholder={adminData?.name || ''} 
+                placeholder={userData?.name || ''} 
                 required 
                 onChange={handleChange} 
               />
@@ -132,7 +136,7 @@ const UpdateAdmin = () => {
            
             <div className="register-btn mt-4 d-flex justify-content-start">
               <button type="submit" className="btn btn-primary">
-                Update Admin
+                Update Usesr
               </button>
             </div>
           </form>
@@ -142,4 +146,4 @@ const UpdateAdmin = () => {
   );
 }
 
-export default UpdateAdmin;
+export default UpdateUser;

@@ -30,6 +30,30 @@ a{
   font-size: 1.5rem;
   cursor: pointer;
 }
+
+.header_img .dropdown-toggle::after { 
+  content: none; 
+} 
+
+/* language translation */
+
+.header .lang-translation{
+display: flex;
+justify-content: flex-end;
+align-items: center;
+padding-right: 10px;
+}
+
+.header .lang-button{
+  width:auto;
+  background-color: var(--secondary-color);
+}
+.header .lang-button:hover{
+  background-color: var(--primary-color);
+}
+
+/* end of language translation */
+
 .header_img {
   width: 35px;
   height: 35px;
@@ -169,9 +193,9 @@ a{
     padding: 1rem 1rem 0 0;
   }
   .show {
-    width: calc(var(--nav-width) + 156px);
+    width: calc(var(--nav-width) + 200px);
   }
   .body-pd {
-    padding-left: calc(var(--nav-width) + 188px);
+    padding-left: calc(var(--nav-width) + 230px);
   }
 }

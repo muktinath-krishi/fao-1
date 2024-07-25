@@ -2,6 +2,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './components/Contexts/AuthContext';
+import { LanguageProvider } from './components/Localization/LanguageContext';
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // User login page
 import Login from './components/Login/Login';
@@ -20,24 +24,47 @@ import NoPage from './components/NoPage/NoPage';
 // welcome page
 import WelcomeHome from './components/WelcomeHome/WelcomeHome';
 
-// admin pages
+// sidenavbar
 import Dashboard from './components/Dashboard/AdminDashboard/AdminMainPage/Dashboard';
 import Temperature from './components/Dashboard/AdminDashboard/AdminMainPage/Temperature';
 import Humidity from './components/Dashboard/AdminDashboard/AdminMainPage/Humidity';
+import SuperAdminList from './components/Dashboard/AdminDashboard/SuperAdmin/SuperAdminList';
+import AdminList from './components/Dashboard/AdminDashboard/AdminList/AdminList';
+import UserList from './components/Dashboard/AdminDashboard/User/UserList';
+
+// superadmin/pages
+import ShowSuperAdmin from './components/Dashboard/AdminDashboard/SuperAdmin/ShowSuperAdmin';
+import CreateSuperAdmin from './components/Dashboard/AdminDashboard/SuperAdmin/CreateSuperAdmin';
+import UpdateSuperAdmin from './components/Dashboard/AdminDashboard/SuperAdmin/UpdateSuperAdmin';
 import AdminProfile from './components/Dashboard/AdminDashboard/AdminProfile/AdminProfile';
-import UserList from './components/Dashboard/AdminDashboard/UserList/UserList';
-import CreateUser from './components/Dashboard/AdminDashboard/CreateUser/CreateUser';
-import UpdateUser from './components/Dashboard/AdminDashboard/UpdateUser/UpdateUser';
+
+//admins/pages
+import CreateAdmin from './components/Dashboard/AdminDashboard/CreateAdmin/CreateAdmin';
+import ShowAdmin from './components/Dashboard/AdminDashboard/ShowAdmin/ShowAdmin';
+import UpdateAdmin from './components/Dashboard/AdminDashboard/AdminUpdate/AdminUpdate';
+
+// users/pages
+import CreateUser from './components/Dashboard/AdminDashboard/User/CreateUser';
+import ShowUser from './components/Dashboard/AdminDashboard/User/ShowUser';
+import UpdateUser from './components/Dashboard/AdminDashboard/User/UpdateUser';
+
+//routes
+// import { routePath } from './components/Route/Route';
 
 // app css style
 import './App.css';
-import CreateAdmin from './components/Dashboard/AdminDashboard/CreateAdmin/CreateAdmin';
-import AdminList from './components/Dashboard/AdminDashboard/AdminList/AdminList';
-import ShowAdmin from './components/Dashboard/AdminDashboard/ShowAdmin/ShowAdmin';
-import UpdateAdmin from './components/Dashboard/AdminDashboard/AdminUpdate/AdminUpdate';
-import SuperAdminList from './components/Dashboard/AdminDashboard/SuperAdmin/SuperAdminList';
-import ShowSuperAdmin from './components/Dashboard/AdminDashboard/SuperAdmin/ShowSuperAdmin';
-import CreateSuperAdmin from './components/Dashboard/AdminDashboard/SuperAdmin/CreateSuperAdmin';
+import DeviceManagement from './components/Dashboard/AdminDashboard/DeviceManagement/DeviceManagement';
+import DeviceList from './components/Dashboard/AdminDashboard/DeviceManagement/DeviceList';
+import PinRegistration from './components/Dashboard/AdminDashboard/DeviceManagement/PinRegistration';
+import CreateDevice from './components/Dashboard/AdminDashboard/DeviceManagement/CreateDevice';
+import ShowDevice from './components/Dashboard/AdminDashboard/DeviceManagement/ShowDevice';
+// import UserProfile from './components/Dashboard/AdminDashboard/User/UserProfile';
+
+
+
+
+
+
 
 const App = () => {
   const { role, isAuthenticated } = useAuth();
@@ -58,24 +85,36 @@ const App = () => {
               <Route path="temperature" element={<Temperature />} />
               <Route path="humidity" element={<Humidity />} />
 
-              {/* admin/superadmin */}
-              <Route path="superadmin" element={<SuperAdminList/>} />
-              <Route path="createsuperadmin" element={<CreateSuperAdmin/>} />
-              <Route path="superadmin/showsuperadmin/:id" element={<ShowSuperAdmin/>} />
-              
+              {/* admin/superadmin-management */}
+              <Route path="superadmin-management" element={<SuperAdminList/>} />
+              <Route path="superadmin-management/create" element={<CreateSuperAdmin/>} />
+              <Route path="superadmin-management/:id" element={<ShowSuperAdmin/>} />
+              <Route path="superadmin-management/update/:id" element={<UpdateSuperAdmin/>} />
 
-
-              {/* admin/admins */}
-              <Route path="admins" element={<AdminList />} />
-              <Route path="createadmin" element={<CreateAdmin />} />
-              <Route path="admins/showadmin/:id" element={<ShowAdmin />} />
-              <Route path="admins/updateadmin/:id" element={<UpdateAdmin />} />
-
-              {/* admin/users */}
-              <Route path="users" element={<UserList />} />
-              <Route path="createuser" element={<CreateUser />} />
-              <Route path="updateuser/:id" element={<UpdateUser />} />
+              {/* admin/admin-management */}
+              <Route path="admin-management" element={<AdminList />} />
+              <Route path="admin-management/create" element={<CreateAdmin />} />
+              <Route path="admin-management/:id" element={<ShowAdmin />} />
+              <Route path="admin-management/update/:id" element={<UpdateAdmin />} />
               <Route path="profile/:id" element={<AdminProfile />} />
+
+              {/* admin/user-management */}
+              <Route path="user-management" element={<UserList />} />
+              <Route path="user-management/create" element={<CreateUser />} />
+              <Route path="user-management/:id" element={<ShowUser/>} />
+              <Route path="user-management/update/:id" element={<UpdateUser />} />
+
+              {/* admin/device-management */}
+              <Route path="device-management" element={<DeviceManagement/>}>
+                <Route index element={<DeviceList/>}/>
+                <Route path="device-list" element={<DeviceList/>}/>
+                <Route path="pin-registration" element={<PinRegistration/>}/>
+                <Route path="create" element={<CreateDevice/>}/>
+                <Route path=":id" element={<ShowDevice/>}/>
+
+
+              </Route>
+
             </Route>
           )}
 
@@ -95,14 +134,18 @@ const App = () => {
           {/* catch all */}
           <Route path="*" element={<NoPage />} />
         </Routes>
+        <ToastContainer autoClose= {5000} />
       </Router>
+      
     </div>
   );
 };
 
 const AppWrapper = () => (
   <AuthProvider>
-    <App />
+    <LanguageProvider>
+      <App />
+    </LanguageProvider>
   </AuthProvider>
 );
 

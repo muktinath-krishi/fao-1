@@ -1,15 +1,16 @@
-import React, { useState, useEffect} from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import "../User/style/userlist.css";
 import { API_BASE_URL } from '../../../Api/auth';
-import Loading from '../../../Loading/Loading';
+import Loading from "../../../Loading/Loading";
 import { toast } from 'react-toastify';
+import "./style/userlist.css";
 import strings from '../../../Localization/Localization';
+// import { routePath } from '../../../Route/Route';
 
 
-const SuperAdminList = () => {
-  const [adminData, setAdminData] = useState([]);
+const UserList = () => {
+  const [userData, setUserData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -25,53 +26,54 @@ const SuperAdminList = () => {
     toast.success(message, { position: "top-right", autoClose: 5000 });
   };
 
+
   const notifyError = (message) => {
     toast.error(message, { position: "top-right", autoClose: 5000 });
   };
 
   // fetching api 
   useEffect(() => {
-    const fetchAdminData = async () => {
+    const fetchUserData = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/admin/super-admin`);
-        setAdminData(response.data.admins);   
+        const response = await axios.get(`${API_BASE_URL}/admin/users`);
+        setUserData(response.data.users);
+       
         setLoading(false);
       } catch (error) {
-        setError('Failed to fetch admin data.');
+        setError('Failed to fetch user data.');
         setLoading(false);
       }
     };
 
-    fetchAdminData();
+    fetchUserData();
   }, []);
 
-
+ 
   // isBlocked function
   const handleBlockToggle = async (userId, isBlocked) => {
     try {
-      const response = await axios.put(`${API_BASE_URL}/admin/super-admin/block?userId=${userId}`, { isBlocked: !isBlocked });
-
-      const updatedAdminData = adminData.map(admin => 
-        admin.id === userId ? { ...admin, is_blocked: !admin.is_blocked } : admin
+      const response = await axios.put(`${API_BASE_URL}/admin/users/block?userId=${userId}`,{isBlocked:!isBlocked});
+      const updatedUserData = userData.map(user => 
+        user.id === userId ? { ...user, is_blocked: !user.is_blocked } : user
       );
-      setAdminData(updatedAdminData);
+      setUserData(updatedUserData);
       notifySuccess(response.data.message);
     } catch (error) {
-      // console.error('Error blocking/unblocking super admin:', error);
-      notifyError('Failed to update super admin status.');
+      // console.error('Error blocking/unblocking user', error);
+      notifyError('Failed to update user status.');
     }
   };
 
 // delete function
   const handleDelete = async (userId) => {
     try {
-      const response = await axios.delete(`${API_BASE_URL}/admin/super-admin/delete?userId=${userId}`);
-  
-      const updatedAdminData = adminData.filter(admin => admin.id !== userId);
-      setAdminData(updatedAdminData);
+      const response = await axios.delete(`${API_BASE_URL}/admin/users/delete?userId=${userId}`);
+      const updatedUserData = userData.filter(user => user.id !== userId);
+      setUserData(updatedUserData);
       notifyDelete(response.data.message);
     } catch (error) {
-      notifyDeleteError('Failed to delete super admin.');
+      // console.error('Error deleting user:', error);
+      notifyDeleteError('Failed to delete user.');
     }
   };
 
@@ -87,11 +89,11 @@ const SuperAdminList = () => {
     <>
       <div className="container userlist">
         <div className="create-user d-flex justify-content-end align-items-center">
-          <NavLink to="create" className="text-decoration-none">
+          <Link to="create" className="text-decoration-none">
             <button type="button" className='btn btn-primary d-flex gap-2 justify-content-center align-items-center'>
-              <i className='bx bx-plus nav_icon'></i>Create Super Admin
+              <i className='bx bx-plus nav_icon'></i>Create User
             </button>
-          </NavLink>
+          </Link>
         </div>
         <div className="userlist-table mt-5">
           <table className="table text-start">
@@ -99,17 +101,17 @@ const SuperAdminList = () => {
               <tr>
                 <th scope="col">{strings.id}</th>
                 <th scope="col">{strings.name}</th>
-                <th scope="col">{strings.email}</th>
+                <th scope="col">{strings.phone_number}</th>
                 <th scope="col">{strings.status}</th>
                 <th scope="col">{strings.action}</th>
               </tr>
             </thead>
             <tbody>
-              {adminData.map((item, index) => (
+              {userData.map((item, index) => (
                 <tr key={item.id}>
                   <th scope="row">{index + 1}</th>
                   <td>{item.name}</td>
-                  <td>{item.email}</td>
+                  <td>{item.phone_number}</td>
                   <td>{item.is_blocked ? (<span className="badge fs-6 fw-light text-bg-danger">Blocked</span>) : (<span className="badge fs-6 fw-light  text-bg-success">Active</span>)}</td>
                   <td className='d-flex gap-2'>
                     <Link to={`${item.id}`}>
@@ -136,17 +138,17 @@ const SuperAdminList = () => {
                         onChange={() => handleBlockToggle(item.id, item.is_blocked)}
                       />
                     </div>
-                    
-                  </td>   
+
+                  </td>
+              
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       </div>
-     
     </>
   );
 }
 
-export default SuperAdminList;
+export default UserList;

@@ -9,8 +9,9 @@ export const API_BASE_URL = 'https://fao.muktinathitech.com.np/api/v1';
 const loginUser = async (phone_number, password) => {
   const response = await axios.post(`${API_BASE_URL}/login`, { phone_number, password });
   const { _token, user } = response.data;
-  return { response, token: _token, user };
+  return { response, token: _token, user:user };
 };
+
 
 // admin and super_admin api call
 const loginAdmin = async (email, password) => {
@@ -21,7 +22,7 @@ const loginAdmin = async (email, password) => {
   //   throw new Error('You have been blocked. Please contact the administrator.');
   // }
 
-  return {token: _token, user};
+  return {token: _token, user:user};
  
 };
 

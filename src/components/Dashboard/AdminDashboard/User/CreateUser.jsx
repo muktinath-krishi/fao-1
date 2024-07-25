@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import "../User/style/createuser.css";
+import "./style/createuser.css";
 import axios from "axios";
 import { API_BASE_URL } from "../../../Api/auth"
 import { toast } from "react-toastify";
 
-const CreateAdmin = () => {
+
+const CreateSuperAdmin = () => {
   const navigate = useNavigate();
     const[name,setName] = useState('');
-    const[email,setEmail] = useState('');
+    const[phone_number,setPhoneNumber] = useState('');
     const[password,setPassword] = useState('');
     const[confirm_password,setConfirmPassword] = useState('');
     const[error,setError] = useState('');
-    
+    // const [loading, setLoading] = useState(false);
 
     const notifyCreated = (message) => {
       toast.success(message, { position: "top-right", autoClose: 5000 });
-    }; 
+    };
 
     const handleChange = (e) => {
       const { name, value } = e.target;
@@ -24,8 +25,8 @@ const CreateAdmin = () => {
           case 'name':
               setName(value);
               break;
-          case 'email':
-              setEmail(value);
+          case 'phone_number':
+              setPhoneNumber(value);
               break;
           case 'password':
               setPassword(value);
@@ -47,22 +48,20 @@ const CreateAdmin = () => {
 
     try {
       
-      const response = await axios.post(`${API_BASE_URL}/admin/admins/store`, {
+      const response = await axios.post(`${API_BASE_URL}/admin/users/store`, {
             name,
-            email,
+            phone_number,
             password,
             confirm_password
         });
-        
         notifyCreated(response.data.message);
-        navigate("/admin/admin-management");
+        navigate("/admin/user-management");
 
     } catch (error) {
-        setError('Failed to create admin.');
-        console.error('Error creating admin:', error);
-        
+        setError('Failed to create user.');
     }
 };
+
 
 
   return (
@@ -73,12 +72,12 @@ const CreateAdmin = () => {
           
           <div className="col-md-4 header-content text-start">
             <div className="back-btn mb-2">
-              <Link to="/admin/admin-management">
+              <Link to="/admin/user-management">
                 <i className='bx bx-arrow-back' ></i>
               </Link>
             </div>
             <h1>
-              <span>Empower the Future</span><br />Register a New Admin Today
+              <span>Empower the Future</span><br />Register a New User Today
             </h1>
             <p className='mt-4'>
               Welcome to the farmer registration page! Please fill out the form below with the necessary details to register a new farmer.
@@ -91,12 +90,12 @@ const CreateAdmin = () => {
         <div className="col-md-8 form-container p-0 mt-5 text-start d-flex justify-content-center">
           <form className="row farmer-form d-flex justify-content-start" onSubmit={handleSubmit}>
             <div className="col-md-4 col-12 form-group">
-              <label htmlFor="name" className='form-label'>Admin Name</label>
+              <label htmlFor="name" className='form-label'>User Name</label>
               <input type="text" id="name" className="form-control" name="name" required onChange={handleChange} />
             </div>
             <div className="col-md-4 col-12 form-group">
-              <label htmlFor="email" className='form-label'>Admin Email</label>
-              <input type="email" id="email" className="form-control" name="email" required onChange={handleChange} />
+              <label htmlFor="phone_number" className='form-label'>Phone Number</label>
+              <input type="number" id="phone_number" className="form-control" name="phone_number" required onChange={handleChange} />
             </div>
             <div className="col-md-4 col-12 form-group">
               <label htmlFor="password" className='form-label'>Password</label>
@@ -111,7 +110,7 @@ const CreateAdmin = () => {
            
             <div className="register-btn mt-4 d-flex justify-content-start">
               <button type="submit" className="btn btn-primary">
-                Register Admin
+                Register User
               </button>
             </div>
           </form>
@@ -121,4 +120,24 @@ const CreateAdmin = () => {
   )
 }
 
-export default CreateAdmin;
+export default CreateSuperAdmin;
+
+
+{/* <div className="assign-device d-flex gap-5 mt-4">
+              <div className="mb-3 form-check">
+                <input type="checkbox" className="form-check-input" id="heater" name="heater" onChange={handleChange} />
+                <label className="form-check-label" htmlFor="heater">Heater</label>
+              </div>
+              <div className="mb-3 form-check">
+                <input type="checkbox" className="form-check-input" id="coolingPad" name="coolingPad" onChange={handleChange} />
+                <label className="form-check-label" htmlFor="coolingPad">Cooling Pad</label>
+              </div>
+              <div className="mb-3 form-check">
+                <input type="checkbox" className="form-check-input" id="fogger" name="fogger" onChange={handleChange} />
+                <label className="form-check-label" htmlFor="fogger">Fogger</label>
+              </div>
+              <div className="mb-3 form-check">
+                <input type="checkbox" className="form-check-input" id="fan" name="fan" onChange={handleChange} />
+                <label className="form-check-label" htmlFor="fan">Fan</label>
+              </div>
+</div> */}
