@@ -16,9 +16,9 @@ const AdminLogin = () => {
     e.preventDefault();
     setLoading(true); // Start loading
 
-
+    const data = await handleAdminLogin(email, password);
     try {
-      const data = await handleAdminLogin(email, password);
+      
       setLoading(false); // Stop loading
 
          if (data.user.role === 'admin' || data.user.role === 'super_admin') {

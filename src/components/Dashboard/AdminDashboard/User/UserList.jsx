@@ -87,7 +87,7 @@ const UserList = () => {
 
   return (
     <>
-      <div className="container userlist">
+      <div className="userlist">
         <div className="create-user d-flex justify-content-end align-items-center">
           <Link to="create" className="text-decoration-none">
             <button type="button" className='btn btn-primary d-flex gap-2 justify-content-center align-items-center'>

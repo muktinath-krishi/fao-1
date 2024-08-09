@@ -9,6 +9,8 @@
     "admin":"Admin",
     "user":"User",
     "device":"Device",
+    "greenhouse_management":"Greenhouse Management",
+    "soilless_management":"Soilless Management",
     "id":"Id",
     "name":"Name",
     "email":"Email",

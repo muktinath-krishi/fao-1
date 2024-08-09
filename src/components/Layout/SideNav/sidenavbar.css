@@ -36,39 +36,56 @@ a{
 } 
 
 /* language translation */
-
+.lang-translation .dropdown-toggle::after{
+  content: none;
+}
 .header .lang-translation{
 display: flex;
 justify-content: flex-end;
 align-items: center;
-padding-right: 10px;
 }
 
 .header .lang-button{
-  width:auto;
-  background-color: var(--secondary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border-style: none;
+  width:40px;
+  height:40px;
+  border-radius: 50%;
+  object-fit: cover;
+  overflow: hidden;
+}
+.header .lang-button img{
+  width:60px;
+  height:auto;
+  border-radius: 50%;
 }
 .header .lang-button:hover{
-  background-color: var(--primary-color);
+  background-color: transparent;
 }
 
 /* end of language translation */
 
-.header_img {
-  width: 35px;
-  height: 35px;
+.header_img .profile-img {
+  width: 40px;
+  height: 40px;
   display: flex;
   justify-content: center;
   border-radius: 50%;
+  overflow: hidden;
+  object-fit: cover;
 }
+
 .header_img li {
   list-style: none;
 }
 .l-navbar {
   position: fixed;
   top: 0;
-  left: -30%;
-  width: var(--nav-width);
+  left:0;
+  width:260px;
   height: 100%;
   background-color: var(--secondary-color);
   padding: 0.5rem 1rem 0 0;
@@ -86,9 +103,7 @@ padding-right: 10px;
 }
 .container-with-scroll {
   overflow: hidden;
-
 }
-
 
 .nav_link {
   display: grid;
@@ -134,11 +149,14 @@ padding-right: 10px;
   font-size: 1.25rem;
 }
 .show {
-  left: 0;
+  left:0px;
 }
+
 .body-pd {
-  padding-left: calc(var(--nav-width) + 1rem);
+  padding-left: 0px;
 }
+
+
 .active {
   color: var(--primary-color);
 }
@@ -155,31 +173,27 @@ padding-right: 10px;
   height: auto;
   width: 100%;
   transition: padding-left 0.5s;
-  padding-top:20px;
-
+  padding:20px 0px;
 }
 
 .body-container.body-pd {
-  padding-left: calc(var(--nav-width) + 2rem);
-  padding-left: 50px;
+  padding-left: 0;
 }
 
 .admin-main-page {
   transition: padding-left 0.5s;
+  padding-left: calc(var(--nav-width) + 13rem);
 }
 
-.admin-main-page.body-pd {
-  padding-left: calc(var(--nav-width) + 2rem);
-}
+
 
 @media screen and (min-width: 768px) {
   main {
     margin: calc(var(--header-height) + 1rem) 0 0 0;
-    padding-left: calc(var(--nav-width) + 2rem);
   }
   .header {
     height: calc(var(--header-height) + 1rem);
-    padding: 0 2rem 0 calc(var(--nav-width) + 2rem);
+    padding: 0 2rem 0 calc(var(--nav-width) + 14rem);
   }
   .header_img {
     width: 40px;
@@ -193,9 +207,10 @@ padding-right: 10px;
     padding: 1rem 1rem 0 0;
   }
   .show {
-    width: calc(var(--nav-width) + 200px);
+    width: calc(var(--nav-width));
   }
   .body-pd {
-    padding-left: calc(var(--nav-width) + 230px);
+    padding-left: calc(var(--nav-width) + 1rem);
   }
+
 }

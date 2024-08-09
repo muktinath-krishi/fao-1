@@ -26,9 +26,7 @@ const UpdateSuperAdmin = () => {
 
   useEffect(() => {
     const fetchAdminData = async () => {
-      // console.log("user id from url:",id)
       try {
-        // console.log("i am here")
         const response = await axios.get(`${API_BASE_URL}/admin/super-admin?userId=${id}`);
 
         if (response) {

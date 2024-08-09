@@ -81,8 +81,6 @@ const Header = () => {
         changeLanguage(lang);
       };
 
-
-
   return (
     <>
     <header className="header" id="header">
@@ -91,9 +89,9 @@ const Header = () => {
         </div>
         <div className="lang-translation" style={{width:"90%"}}>
           <div className="dropdown">
-            <button className="btn btn-secondary dropdown-toggle lang-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src={flagImage} alt="English" className='me-2' width="30" height="30"/>
-            </button>
+            <Link className="btn btn-secondary dropdown-toggle lang-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src={flagImage} alt="English"/>
+            </Link>
             <ul className="dropdown-menu mt-4">
               <li>
                 <Link className="dropdown-item" onClick={()=>handleLanguageChange('eng')}>
@@ -111,8 +109,8 @@ const Header = () => {
 
         <div className="header_img">
             <li className="nav-item dropdown"> 
-              <Link className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src={"https://fao.muktinathitech.com.np" + profile_image} alt={name} style={{borderRadius: '100%'}} />
+              <Link className="nav-link dropdown-toggle profile-img" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src={"https://fao.muktinathitech.com.np" + profile_image} alt={name} />
               </Link>
                 <ul className="dropdown-menu dropdown-menu-end mt-4 me-5" aria-labelledby="navbarDropdown">        
                     <li><Link to={`profile/${userId}`} className="dropdown-item">{strings.profile}</Link></li>

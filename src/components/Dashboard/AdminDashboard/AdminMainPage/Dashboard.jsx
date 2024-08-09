@@ -4,7 +4,7 @@ import "./dashboard.css"
 const Dashboard = () => {
   return (
     <>
-    <div className="container admin-dashboard gap-5 mt-3">
+    <div className="admin-dashboard gap-5 mt-3">
       
       {/* temperature */}
       <div className="col-md-2 gap-3 temperature-card">

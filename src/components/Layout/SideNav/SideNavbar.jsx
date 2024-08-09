@@ -87,9 +87,16 @@ const SideNavbar = () => {
           
 
             {(role==='super_admin') && (
-              <NavLink to="device-management" className={({isActive=(location.pathname.startsWith('/admin/device-management'))})=>isActive?"nav_link active":"nav_link"}>
+              <NavLink to="greenhouse-management" className={({isActive})=>isActive?"nav_link active":"nav_link"}>
               <i className='bx bx-devices nav_icon'></i>
-              <span className="nav_name">{strings.device}</span>
+              <span className="nav_name">{strings.greenhouse_management}</span>
+            </NavLink>
+            )}
+
+            {(role==='super_admin') && (
+              <NavLink to="soilless-management" className={({isActive})=>isActive?"nav_link active":"nav_link"}>
+              <i className='bx bx-devices nav_icon'></i>
+              <span className="nav_name">{strings.soilless_management}</span>
             </NavLink>
             )}
 
@@ -105,10 +112,7 @@ const SideNavbar = () => {
 
 
 
-            {/* <NavLink to={`profile/${userId}`} className={({isActive})=>isActive?"nav_link active":"nav_link"}>
-              <i className="bx bxs-user nav_icon"></i>
-              <span className="nav_name">Profile</span>
-            </NavLink> */}
+           
             
           </div>
           

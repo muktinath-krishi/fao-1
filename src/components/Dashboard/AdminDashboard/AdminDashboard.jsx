@@ -1,7 +1,6 @@
 import React, {useState,useEffect} from 'react'
 import Header from "../../Layout/Header/Header"
 import SideNavbar from '../../Layout/SideNav/SideNavbar';
-// import AdminMainPage from './AdminMainPage/AdminMainPage';
 import { Outlet } from 'react-router-dom';
 
 const AdminDashboard = () => {

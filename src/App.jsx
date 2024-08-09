@@ -53,12 +53,15 @@ import UpdateUser from './components/Dashboard/AdminDashboard/User/UpdateUser';
 
 // app css style
 import './App.css';
-import DeviceManagement from './components/Dashboard/AdminDashboard/DeviceManagement/DeviceManagement';
-import DeviceList from './components/Dashboard/AdminDashboard/DeviceManagement/DeviceList';
-import PinRegistration from './components/Dashboard/AdminDashboard/DeviceManagement/PinRegistration';
-import CreateDevice from './components/Dashboard/AdminDashboard/DeviceManagement/CreateDevice';
-import ShowDevice from './components/Dashboard/AdminDashboard/DeviceManagement/ShowDevice';
-// import UserProfile from './components/Dashboard/AdminDashboard/User/UserProfile';
+// import DeviceManagement from './components/Dashboard/AdminDashboard/DeviceManagement/DeviceManagement';
+// import DeviceList from './components/Dashboard/AdminDashboard/DeviceManagement/DeviceList';
+// import PinRegistration from './components/Dashboard/AdminDashboard/DeviceManagement/PinRegistration';
+// import CreateDevice from './components/Dashboard/AdminDashboard/DeviceManagement/CreateDevice';
+// import ShowDevice from './components/Dashboard/AdminDashboard/DeviceManagement/ShowDevice';
+// import UpdateDevice from './components/Dashboard/AdminDashboard/DeviceManagement/UpdateDevice';
+import GreenhouseManagement from './components/Dashboard/AdminDashboard/DeviceManagement/GreenhouseManagement/GreenhouseManagement';
+import SoillessManagement from './components/Dashboard/AdminDashboard/DeviceManagement/SoillessManagement/SoillessManagement';
+
 
 
 
@@ -104,16 +107,21 @@ const App = () => {
               <Route path="user-management/:id" element={<ShowUser/>} />
               <Route path="user-management/update/:id" element={<UpdateUser />} />
 
-              {/* admin/device-management */}
-              <Route path="device-management" element={<DeviceManagement/>}>
+              
+              {/* <Route path="device-management" element={<DeviceManagement/>}>
                 <Route index element={<DeviceList/>}/>
                 <Route path="device-list" element={<DeviceList/>}/>
                 <Route path="pin-registration" element={<PinRegistration/>}/>
                 <Route path="create" element={<CreateDevice/>}/>
                 <Route path=":id" element={<ShowDevice/>}/>
+                <Route path="update/:id" element={<UpdateDevice/>}/>
+              </Route> */}
+
+              {/* admin/device-management */}
+              <Route path="greenhouse-management" element={<GreenhouseManagement/>}/>
+              <Route path="soilless-management" element={<SoillessManagement/>}/>
 
 
-              </Route>
 
             </Route>
           )}
